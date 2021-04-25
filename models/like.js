@@ -12,6 +12,14 @@ class LikeModel extends HTTP {
       }
     })
   }
+
+  // 获取期刊的点赞数据
+  getClassicLikeStates(artID, category, sCallback) {
+    this.request({
+      url: `/classic/${category}/${artID}/favor`,
+      success: sCallback
+    })
+  }
 }
 
 export { LikeModel }
