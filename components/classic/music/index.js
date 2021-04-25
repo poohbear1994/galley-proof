@@ -1,5 +1,9 @@
-// components/classic/music/index.js
+import {classicBeh} from '../classic-beh'
+
 Component({
+  // 继承behavior
+  behaviors:[classicBeh],
+
   /**
    * 组件的属性列表
    */

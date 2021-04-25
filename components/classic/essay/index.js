@@ -1,5 +1,5 @@
-// components/classic/movie/index.js
 import {classicBeh} from '../classic-beh'
+
 Component({
   // 继承behavior
   behaviors:[classicBeh],
@@ -8,7 +8,6 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    
   },
 
   /**

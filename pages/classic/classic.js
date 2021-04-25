@@ -1,7 +1,7 @@
 import { ClassicModel } from '../../models/classic'
 import { LikeModel } from '../../models/like'
-const classic = new ClassicModel()
-const like = new LikeModel()
+const classicModel = new ClassicModel()
+const likeModel = new LikeModel()
 
 Page({
 
@@ -18,8 +18,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
-    classic.getLatest((res) => {
+    classicModel.getLatest((res) => {
       this.setData({
         classic:res
       })
@@ -29,20 +28,35 @@ Page({
   /**
    * 自定义事件
    */
+  // 点赞行为
   onLike: function (event) {
     // 获取like组件当前的状态，需要发送的请求是 like 还是 cancle
     const behavior = event.detail.behavior
     const artId = this.data.classic.id
     const category = this.data.classic.type
-    like.like(behavior, artId, category)
+    likeModel.like(behavior, artId, category)
   },
+
   // 上一期期刊
-  onPrevious: function(event){
-    console.log("previous")
+  onPrevious: function() {
+    this._updateClassic( "previous" )
   },
+
   // 下一期期刊
-  onNext: function(event){
-    console.log("next")
+  onNext: function() {
+    this._updateClassic( "next" )
+  },
+
+  // 获取期刊数据
+  _updateClassic: function (nextOrPrevious) {
+    let index = this.data.classic.index
+    classicModel.getClassic(index, nextOrPrevious, (res) => {
+      this.setData({
+        classic:res,
+        latest: classicModel.isLatest(res.index),
+        first: classicModel.isFirst(res.index)
+      })
+    })
   },
 
   /**
