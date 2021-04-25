@@ -22,7 +22,7 @@ class ClassicModel extends HTTP{
     if (!classic) {
       // 缓存中获取不到再从服务器获取
       this.request({
-        url: `/classic/${inde}/${nextOrPrevious}`,
+        url: `/classic/${index}/${nextOrPrevious}`,
         success: (res) => {
           wx.setStorageSync(this._getKey(res.index), res)
           sCallback(res)
