@@ -5,12 +5,11 @@ class ClassicModel extends HTTP{
   getLatest(sCallback) {
     this.request({
       url: `/classic/latest`,
-      success: (res) => {
-        sCallback(res)
-        this._setLatestIndex(res.index)
-        let key = this._getKey(res.index)
-        wx.setStorageSync(key, res)
-      }
+    }).then((res) => {
+      sCallback(res)
+      this._setLatestIndex(res.index)
+      let key = this._getKey(res.index)
+      wx.setStorageSync(key, res)
     })
   }
 
@@ -23,10 +22,9 @@ class ClassicModel extends HTTP{
       // 缓存中获取不到再从服务器获取
       this.request({
         url: `/classic/${index}/${nextOrPrevious}`,
-        success: (res) => {
-          wx.setStorageSync(this._getKey(res.index), res)
-          sCallback(res)
-        }
+      }).then((res) => {
+        wx.setStorageSync(this._getKey(res.index), res)
+        sCallback(res)
       })
     }else{
       sCallback(classic)

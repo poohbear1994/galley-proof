@@ -38,7 +38,18 @@ Page({
     const behavior = event.detail.behavior
     const artId = this.data.classic.id
     const category = this.data.classic.type
-    likeModel.like(behavior, artId, category)
+    const like = likeModel.like(behavior, artId, category)
+    like.then(() => {
+      wx.showToast({
+        title: behavior === 'like' ? '点赞成功' : '点赞已取消',
+        duration: 1500
+      })
+    }, () => {
+      wx.showToast({
+        title: behavior === 'like' ? '点赞失败' : '取消点赞失败',
+        duration: 1500
+      })
+    })
   },
 
   // 上一期期刊
@@ -53,7 +64,7 @@ Page({
 
   // 获取期刊数据
   _updateClassic: function (nextOrPrevious) {
-    let index = this.data.classic.index
+    const index = this.data.classic.index
     classicModel.getClassic(index, nextOrPrevious, (res) => {
       this._getLikeStatus(res.id, res.type)
       this.setData({
@@ -66,7 +77,8 @@ Page({
 
   // 获取点赞状态
   _getLikeStatus: function (artID, category) {
-    likeModel.getClassicLikeStates(artID, category, (res) => {
+    const likeState = likeModel.getClassicLikeStates(artID, category)
+    likeState.then((res) => {
       this.setData({
         likeCount:res.fav_nums,
         likeStatus:res.like_status
