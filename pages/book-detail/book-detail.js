@@ -9,7 +9,8 @@ Page({
   data: {
     comments: [],
     book: null,
-    likeCount: 0
+    likeCount: 0,
+    likeStatus: false
   },
 
   /**
@@ -29,7 +30,7 @@ Page({
     comments.then(res => {
       console.log(res)
       this.setData({
-        comments: res
+        comments: res.comments
       })
     })
     likeStatus.then(res => {
