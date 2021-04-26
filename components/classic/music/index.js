@@ -55,7 +55,6 @@ Component({
           playing: true
         })
         mMgr.src = this.properties.src
-        console.log(this.properties.title)
         mMgr.title = this.properties.title
         console.log(mMgr)
       } else {
