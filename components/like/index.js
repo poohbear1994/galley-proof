@@ -18,8 +18,8 @@ Component({
   data: {
     like: false,
     count: 9,
-    yesSrc: '../../images/like.png',
-    noSrc: '../../images/like@dis.png'
+    yesSrc: './images/like.png',
+    noSrc: './images/like@dis.png'
   },
 
   /**
