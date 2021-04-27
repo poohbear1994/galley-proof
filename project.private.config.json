@@ -1,4 +1,5 @@
 {
+  "setting": {},
   "condition": {
     "plugin": {
       "list": []
@@ -15,6 +16,12 @@
           "name": "book-detail",
           "pathName": "pages/book-detail/book-detail",
           "query": "bid=1120",
+          "scene": null
+        },
+        {
+          "name": "book-detail",
+          "pathName": "pages/book-detail/book-detail",
+          "query": "bid=1049",
           "scene": null
         }
       ]
