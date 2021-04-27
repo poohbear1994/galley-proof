@@ -1,12 +1,25 @@
 import { HTTP } from '../utils/http'
 
 class BookModel extends HTTP {
+  // 获取热门书籍数据
   getHotList() {
     return this.request({
       url: "/book/hot_list"
     })
   }
 
+  // 获取所搜书籍数据
+  search(start, q) {
+    return this.request({
+      url: '/book/search?summary=1',
+      data: {
+        q: q,
+        start: start
+      }
+    })
+  }
+
+  // 获取我的书籍的数量
   getMyBookCount() {
     return this.request({
       url: "/book/favor/count"
