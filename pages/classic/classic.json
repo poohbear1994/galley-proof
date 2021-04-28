@@ -6,5 +6,6 @@
     "v-navi" : "/components/navi/index",
     "v-music" : "/components/classic/music/index",
     "v-essay" : "/components/classic/essay/index"
-  }
+  },
+  "enablePullDownRefresh": true
 }
