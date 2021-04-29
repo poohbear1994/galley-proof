@@ -65,3 +65,8 @@
 .books-container v-book{
   margin-bottom: 10rpx;
 }
+
+.loading {
+  position: fixed;
+  top: 50%
+}

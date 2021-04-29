@@ -2,7 +2,8 @@ const paginationBeh = Behavior({
   data: {
     dataArray: [],
     total: null,
-    noneResult: false
+    noneResult: false,
+    loading: false
   },
 
   methods: {
@@ -48,7 +49,26 @@ const paginationBeh = Behavior({
         total : null,
         noneResult: false
       })
-    }
+    },
+
+    // 请求上🔒
+    locked() {
+      this.setData({
+        loading: true
+      })
+    },
+
+    // 解开请求🔒
+    unLocked() {
+      this.setData({
+        loading: false
+      })
+    },
+
+    // 请求🔒是否生效
+    isLocked() {
+      return this.data.loading ? true :false
+    },
   }
 })
 

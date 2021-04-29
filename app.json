@@ -30,7 +30,7 @@
       },
       {
         "pagePath": "pages/my/my",
-        "text": "书籍",
+        "text": "我的",
         "iconPath": "./images/tab/my.png",
         "selectedIconPath": "./images/tab/my@highlight.png"
       }

@@ -7,7 +7,8 @@
   </view>
   <view class="sub-container">
     <image class="head-img" src="/images/book/quality.png"/>
-    <view class="books-container">
+    <v-loading class="loading" wx:if="{{!books.length}}"/>
+    <view wx:else class="books-container">
       <block wx:for="{{books}}" wx:key="id">
         <v-book book="{{item}}"/>
       </block>

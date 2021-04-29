@@ -1,7 +1,7 @@
 {
   "usingComponents": {
-    "v-book": "/components/book/index",
-    "v-search": "/components/search/index"
-  },
-  "enablePullDownRefresh": true
+    "v-book": "/components/book",
+    "v-search": "/components/search",
+    "v-loading": "/components/loading"
+  }
 }

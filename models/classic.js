@@ -42,6 +42,13 @@ class ClassicModel extends HTTP{
     return index === latestIndex ? true : false
   }
 
+  // 获取我喜欢的期刊数据
+  getMyFavor() {
+    return this.request({
+      url: "/classic/favor"
+    })
+  }
+
   // 缓存最新的期刊刊号
   _setLatestIndex(index) {
     wx.setStorageSync('latest', index)

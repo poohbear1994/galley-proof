@@ -24,9 +24,7 @@ Component({
     hotWords: [],
     searching: false,
     query:'',
-    loading: false,
-    loadingCenter: false,
-    
+    loadingCenter: false
   },
 
   /**
@@ -68,22 +66,22 @@ Component({
       if(!this.hasMore()) {
         return
       }
-      if(this._isLocked()) {
+      if(this.isLocked()) {
         return
       }
       const start = this.getCurrentStart()
-      this._locked()
+      this.locked()
 
       bookModel.search(start, this.data.query)
       .then(res => {
         this.setMoreData(res.books)
-        this._unLocked()
+        this.unLocked()
       }, () => {
         wx.showToast({
           title: '当前网络错误～',
           icon: 'loading'
         })
-        this._unLocked()
+        this.unLocked()
       })
     },
 
@@ -105,25 +103,6 @@ Component({
     _clearKeyword() {
       this.setData({
         query: ''
-      })
-    },
-
-    // 请求🔒是否生效
-    _isLocked() {
-      return this.data.loading ? true :false
-    },
-
-    // 请求上🔒
-    _locked() {
-      this.setData({
-        loading: true
-      })
-    },
-
-    // 解开请求🔒
-    _unLocked() {
-      this.setData({
-        loading: false
       })
     },
 

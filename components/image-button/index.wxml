@@ -1,0 +1,3 @@
+<button bind:tap="onGetUserInfo" plain='{{true}}' class="container">
+  <slot name="img"></slot>
+</button>
