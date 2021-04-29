@@ -1,5 +1,5 @@
-import { BookModel } from "../../models/book"
-import { random } from "../../utils/common.js"
+import { BookModel } from '../../models/book'
+import { random } from '../../utils/common.js'
 
 const bookModel = new BookModel()
 Page({
@@ -13,63 +13,33 @@ Page({
     more: ''
   },
 
+  // 搜索状态
   onSearching(event) {
     this.setData({
       searching: true
     })
   },
 
+  // 取消事件
   onCancel(event) {
     this.setData({
       searching: false
     })
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    bookModel.getHotList()
-    .then(res => {
-      this.setData({
-        books: res
-      })
+  // 设置热门搜索
+  setHotList(hotList) {
+    this.setData({
+      books: hotList
     })
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
+   * 生命周期函数--监听页面加载
    */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-    
+  async onLoad() {
+    const hotList = await bookModel.getHotList()
+    this.setHotList(hotList)
   },
 
   /**
@@ -79,12 +49,5 @@ Page({
     this.setData({
       more: random(16)
     })
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   }
 })

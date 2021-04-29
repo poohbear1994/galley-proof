@@ -1,5 +1,5 @@
-import { BookModel } from "../../models/book"
-import { LikeModel } from "../../models/like"
+import { BookModel } from '../../models/book'
+import { LikeModel } from '../../models/like'
 
 const bookModel = new BookModel()
 const likeModel = new LikeModel()
@@ -20,24 +20,14 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  async onLoad(options) {
     wx.showLoading()
     const bid = options.bid
     const detail = bookModel.getDetail(bid)
     const comments = bookModel.getComments(bid)
     const likeStatus = bookModel.getLikeStatus(bid)
-
-    Promise.all([detail, comments, likeStatus])
-    .then(res => {
-      console.log(res)
-      this.setData({
-        book: res[0],
-        comments: res[1].comments,
-        likeCount: res[2].fav_nums,
-        likeStatus: res[2].like_status
-      })
-      wx.hideLoading()
-    })
+    const bookAllData = await Promise.all([detail, comments, likeStatus])
+    this._setBookData(bookAllData)
   },
   
   onLike(event) {
@@ -45,19 +35,19 @@ Page({
     likeModel.like(like_or_cancel, this.data.book.id, 400)
   },
 
-  onFakePost(event) {
+  onFakePost() {
     this.setData({
       posting: true
     })
   },
 
-  onCancle(event) {
+  onCancle() {
     this.setData({
       posting: false
     })
   },
 
-  onPost(event){
+  async onPost(event) {
     const comment = event.detail.text || event.detail.value
 
     if(!comment) {
@@ -71,74 +61,39 @@ Page({
       })
       return
     }
+    const inputVal = event.detail.value
+    const postComment = await bookModel.postComment(this.data.book.id, comment)
+    this._setComment(postComment, inputVal)
+  },
 
-    bookModel.postComment(this.data.book.id, comment)
-    .then(res => {
-      wx.showToast({
-        title: '评论成功',
-        icon: "none"
-      })
-
-      if(event.detail.value) {
-        this.data.comments.unshift({
-          content: comment,
-          nums: 1
-        })
-      }
-      
-      this.setData({
-        comments: res.comments || this.data.comments,
-        posting: false
-      })
+  // 设置书本数据
+  _setBookData(bookAllData) {
+    this.setData({
+      book: bookAllData[0],
+      comments: bookAllData[1].comments,
+      likeCount: bookAllData[2].fav_nums,
+      likeStatus: bookAllData[2].like_status
     })
+    wx.hideLoading()
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
+  // 提交评论后设置评论
+  _setComment(comment, inputVal) {
+    wx.showToast({
+      title: '评论成功',
+      icon: 'none'
+    })
 
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    if(inputVal) {
+      this.data.comments.unshift({
+        content: inputVal,
+        nums: 1
+      })
+    }
+    
+    this.setData({
+      comments: comment.comments || this.data.comments,
+      posting: false
+    })
   }
 })
