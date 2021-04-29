@@ -20,7 +20,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    classicModel.getLatest((res) => {
+    classicModel.getLatest()
+    .then(res => {
       this.setData({
         classic: res,
         likeCount: res.fav_nums,
@@ -65,7 +66,8 @@ Page({
   // 获取期刊数据
   _updateClassic: function (nextOrPrevious) {
     const index = this.data.classic.index
-    classicModel.getClassic(index, nextOrPrevious, (res) => {
+    classicModel.getClassic(index, nextOrPrevious)
+    .then(res => {
       this._getLikeStatus(res.id, res.type)
       this.setData({
         classic:res,

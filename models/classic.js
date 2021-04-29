@@ -2,32 +2,32 @@ import { HTTP } from '../utils/http'
 
 class ClassicModel extends HTTP{
   // 获取最新期刊数据
-  getLatest(sCallback) {
-    this.request({
+  getLatest() {
+    return this.request({
       url: `/classic/latest`,
     }).then((res) => {
-      sCallback(res)
       this._setLatestIndex(res.index)
       let key = this._getKey(res.index)
       wx.setStorageSync(key, res)
+      return res
     })
   }
 
   // 获取期刊数据
-  getClassic(index, nextOrPrevious, sCallback) {
+  getClassic(index, nextOrPrevious) {
     // 先从缓存中尝试获取数据
     let key = nextOrPrevious === "next" ? this._getKey(index+1) : this._getKey(index-1)
     let classic = wx.getStorageSync(key)
     if (!classic) {
       // 缓存中获取不到再从服务器获取
-      this.request({
+      return this.request({
         url: `/classic/${index}/${nextOrPrevious}`,
       }).then((res) => {
         wx.setStorageSync(this._getKey(res.index), res)
-        sCallback(res)
+        return res
       })
     }else{
-      sCallback(classic)
+      return Promise.resolve(classic)
     }
   }
 
