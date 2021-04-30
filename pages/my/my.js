@@ -17,28 +17,28 @@ Page({
     wx.getUserProfile({
       lang: 'zh_CN',
       desc: '获取登陆授权',
-      success: function (res) {
-        console.log(res.rawData)
+      success( res ) {
+        console.log( res.rawData )
       },
-      fail: function (error) {
+      fail( error ) {
+        console.log( error )
       }
     })
   },
 
-  // 判断用户收否已经授权
+  // 判断用户是否已经授权
   userAuthorized() {
     wx.getSetting({
       withSubscriptions: false,
-      success: (res) => {
-        if(res.authSetting['scope.userInfo']) {
-          console.log(res.authSetting['scope.userInfo'])
+      success: ( res ) => {
+        if( res.authSetting['scope.userInfo'] ) {
           this.setData({
             authorized: true
           })
         }
       },
-      fail: function(error) {
-        console.log(error)
+      fail:( error ) => {
+        console.log( error )
       }
     })
   },
@@ -46,33 +46,46 @@ Page({
   // 获取我喜欢的书的数量
   async getMyBookCount() {
     const myBookCount = await bookModel.getMyBookCount()
-    this._setMyBookCount(myBookCount.count)
+    this._setMyBookCount( myBookCount.count )
   },
 
   // 获取我喜欢的期刊
   async getMyFavor() {
     const classics =  await classicModel.getMyFavor()
-    this._setMyFavor(classics)
+    this._setMyFavor( classics )
   },
 
   // 设置我喜欢的书籍数量
-  _setMyBookCount(bookCount) {
+  _setMyBookCount( bookCount ) {
     this.setData({
       bookCount
     })
   },
 
   // 设置我喜欢的期刊数据
-  _setMyFavor(classics) {
+  _setMyFavor( classics ) {
     this.setData({
       classics
+    })
+  },
+
+  // 设置跳转传递的数据
+  _setJumpData(detail) {
+    getApp().globalData.calssic = detail
+  },
+
+  // 跳转到详情页
+  onJumpToDetail(event) {
+    this._setJumpData(event.detail)
+    wx.switchTab({
+      url: '/pages/classic/classic',
     })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady() {
     this.userAuthorized()
     this.getMyBookCount()
     this.getMyFavor()
@@ -81,7 +94,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow() {
     this.userAuthorized()
     this.getMyBookCount()
     this.getMyFavor()

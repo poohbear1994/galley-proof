@@ -8,8 +8,8 @@ const paginationBeh = Behavior({
 
   methods: {
     // 拼接更多数据
-    setMoreData(dataArray) {
-      const tempArray = this.data.dataArray.concat(dataArray)
+    setMoreData( dataArray ) {
+      const tempArray = this.data.dataArray.concat( dataArray )
       this.setData({
         dataArray: tempArray,
         total: 0
@@ -22,7 +22,7 @@ const paginationBeh = Behavior({
     },
 
     // 设置总数
-    setTotal(total) {
+    setTotal( total ) {
       this.setData({
         total: total
       })
@@ -35,7 +35,7 @@ const paginationBeh = Behavior({
 
     // 是否还有更多数据
     hasMore() {
-      if(this.data.dataArray.length >= this.data.total) {
+      if( this.data.dataArray.length >= this.data.total ) {
         return false
       } else {
         return true
@@ -67,7 +67,7 @@ const paginationBeh = Behavior({
 
     // 请求🔒是否生效
     isLocked() {
-      return this.data.loading ? true :false
+      return this.data.loading ? true : false
     },
   }
 })

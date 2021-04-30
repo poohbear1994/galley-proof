@@ -14,21 +14,21 @@ Page({
   },
 
   // 搜索状态
-  onSearching(event) {
+  onSearching() {
     this.setData({
       searching: true
     })
   },
 
   // 取消事件
-  onCancel(event) {
+  onCancel() {
     this.setData({
       searching: false
     })
   },
 
   // 设置热门搜索
-  setHotList(hotList) {
+  setHotList( hotList ) {
     this.setData({
       books: hotList
     })
@@ -39,15 +39,15 @@ Page({
    */
   async onLoad() {
     const hotList = await bookModel.getHotList()
-    this.setHotList(hotList)
+    this.setHotList( hotList )
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom() {
     this.setData({
-      more: random(16)
+      more: random( 16 )
     })
   }
 })

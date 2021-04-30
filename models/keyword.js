@@ -1,9 +1,9 @@
-import { HTTP } from "../utils/http"
+import { HTTP } from '../utils/http'
 class KeywordModel extends HTTP{
   key = 'q'
   maxLength = 10
   getHistory() {
-    return wx.getStorageSync(this.key) || []
+    return wx.getStorageSync( this.key ) || []
   }
 
   getHot() {
@@ -12,16 +12,16 @@ class KeywordModel extends HTTP{
     })
   }
 
-  addToHistory(keyword) {
+  addToHistory( keyword ) {
     let words = this.getHistory()
-    const has = words.includes(keyword)
-    if(!has) {
+    const has = words.includes( keyword )
+    if( !has ) {
       const length = words.length
-      if (length >= this.maxLength) {
+      if ( length >= this.maxLength ) {
         words.pop()
       }
-      words.unshift(keyword)
-      wx.setStorageSync(this.key, words)
+      words.unshift( keyword )
+      wx.setStorageSync( this.key, words )
     }
   }
 }

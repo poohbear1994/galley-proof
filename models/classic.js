@@ -5,58 +5,65 @@ class ClassicModel extends HTTP{
   getLatest() {
     return this.request({
       url: `/classic/latest`,
-    }).then((res) => {
-      this._setLatestIndex(res.index)
-      let key = this._getKey(res.index)
-      wx.setStorageSync(key, res)
+    }).then( res => {
+      this._setLatestIndex( res.index )
+      let key = this._getKey( res.index )
+      wx.setStorageSync( key, res )
       return res
     })
   }
 
-  // 获取期刊数据
-  getClassic(index, nextOrPrevious) {
+  // 获取上一期或下一期期刊数据
+  getClassic( index, nextOrPrevious ) {
     // 先从缓存中尝试获取数据
-    let key = nextOrPrevious === "next" ? this._getKey(index+1) : this._getKey(index-1)
-    let classic = wx.getStorageSync(key)
-    if (!classic) {
+    let key = nextOrPrevious === 'next' ? this._getKey( index+1 ) : this._getKey( index-1 )
+    let classic = wx.getStorageSync( key )
+    if ( !classic ) {
       // 缓存中获取不到再从服务器获取
       return this.request({
         url: `/classic/${index}/${nextOrPrevious}`,
-      }).then((res) => {
-        wx.setStorageSync(this._getKey(res.index), res)
+      }).then( res => {
+        wx.setStorageSync( this._getKey( res.index ), res )
         return res
       })
     }else{
-      return Promise.resolve(classic)
+      return Promise.resolve( classic )
     }
   }
 
+  // 根据id与category获取某期期刊
+  getClassicForArtIDAndCategory( artID, category ) {
+    return this.request({
+      url: `/classic/${category}/${artID}`
+    })
+  }
+
   // 判断期刊是否为第一期
-  isFirst(index) {
+  isFirst( index ) {
     return index === 1 ? true : false
   }
 
   // 判断期刊是否为最后一期
-  isLatest(index) {
-    let latestIndex = this._getLatestIndex()
+  isLatest( index ) {
+    const latestIndex = this._getLatestIndex()
     return index === latestIndex ? true : false
   }
 
   // 获取我喜欢的期刊数据
   getMyFavor() {
     return this.request({
-      url: "/classic/favor"
+      url: '/classic/favor'
     })
   }
 
   // 缓存最新的期刊刊号
   _setLatestIndex(index) {
-    wx.setStorageSync('latest', index)
+    wx.setStorageSync( 'latest', index )
   }
 
   // 获取川村中的最新的期刊刊号
   _getLatestIndex() {
-    let index = wx.getStorageSync('latest')
+    let index = wx.getStorageSync( 'latest' )
     return index
   }
 

@@ -1,18 +1,18 @@
-function format(text){
-  // wxs
+// 定义wxs，在.wxml中调用
+function format( text ){
   if(!text) {
     return
   }
-  var reg = getRegExp('\\\\n','g')
-  var str = text.replace(reg, '\n&nbsp;&nbsp;')
+  var reg = getRegExp( '\\\\n', 'g')
+  var str = text.replace( reg, '\n&nbsp;&nbsp;' )
   return str
 }
 
-function limit(array, length) {
-  return array.slice(0, length)
+function limit( array, length ) {
+  return array.slice( 0, length )
 }
 
 module.exports = {
-  format:format,
-  limit:limit
+  format: format,
+  limit: limit
 }

@@ -1,4 +1,3 @@
-// components/episode/index.js
 Component({
   /**
    * 组件的属性列表
@@ -8,7 +7,7 @@ Component({
     index: {
       type: Number,
       // 当观察到该propertie发生改变时，执行observer函数
-      observer: function(newVal, oldVal, changedPath) {
+      observer: function( newVal ) {
         let val = newVal < 10 ? '0' + newVal : newVal
         this.setData({
           _index: val
@@ -31,22 +30,14 @@ Component({
   },
 
   lifetimes: {
-    attached: function() {
+    attached() {
       let date = new Date()
       let year = date.getFullYear()
       let month = date.getMonth()
-
       this.setData({
         year,
         month: this.data.months[month]
       })
     }
-  },
-
-  /**
-   * 组件的方法列表
-   */
-  methods: {
-
   }
 })

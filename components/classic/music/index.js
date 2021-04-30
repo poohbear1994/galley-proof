@@ -1,19 +1,11 @@
-/*
- * @Author: your name
- * @Date: 2021-04-25 11:48:24
- * @LastEditTime: 2021-04-25 21:43:26
- * @LastEditors: your name
- * @Description: In User Settings Edit
- * @FilePath: /galley-proof/components/classic/music/index.js
- */
-import {classicBeh} from '../classic-beh'
+import { classicBeh } from '../classic-beh'
 
-// 获取音乐管理对象
+// 获取背景音乐管理对象
 const mMgr = wx.getBackgroundAudioManager()
 
 Component({
   // 继承behavior
-  behaviors:[classicBeh],
+  behaviors: [ classicBeh ],
 
   /**
    * 组件的属性列表
@@ -40,24 +32,19 @@ Component({
     this._monitorSwitch()
   },
 
-  detached: function (event) {
-
-  },
-
   /**
    * 组件的方法列表
    */
   methods: {
-    onPlay:function (event) {
+    onPlay() {
       // 切换图片
-      if (!this.data.playing) {
+      if( !this.data.playing ) {
         this.setData({
           playing: true
         })
         mMgr.src = this.properties.src
         mMgr.title = this.properties.title
-        console.log(mMgr)
-      } else {
+      }else{
         this.setData({
           playing: false
         })
@@ -66,14 +53,14 @@ Component({
     },
 
     // 重置播放暂停按钮
-    _recoverStatus: function() {
-      if (mMgr.paused) {
+    _recoverStatus() {
+      if( mMgr.paused ) {
         this.setData({
           playing:false
         })
         return
       }
-      if (mMgr.src === this.properties.src) {
+      if( mMgr.src === this.properties.src ) {
         this.setData({
           playing: true
         })
@@ -81,7 +68,7 @@ Component({
     },
 
     // 总控开关切换
-    _monitorSwitch: function(){
+    _monitorSwitch(){
       mMgr.onPlay(() => {
         this._recoverStatus()
       })

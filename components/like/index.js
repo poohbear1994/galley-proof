@@ -1,16 +1,15 @@
-// comnponents/like.js
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-    like:{
-      type:Boolean
+    like: {
+      type: Boolean
     },
-    count:{
-      type:Number
+    count: {
+      type: Number
     },
-    readOnly:{
+    readOnly: {
       type: Boolean
     }
   },
@@ -29,8 +28,8 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    onLike:function(event){
-      if (this.properties.readOnly) {
+    onLike() {
+      if( this.properties.readOnly ) {
         return
       }
       let like = this.properties.like
@@ -44,9 +43,9 @@ Component({
 
       let behavior = this.properties.like ? "like" : "cancle"
       // 触发从外部传入的like事件
-      this.triggerEvent("like",{
+      this.triggerEvent( "like", {
         behavior: behavior
-      },{})
+      }, {})
     }
   }
 })
