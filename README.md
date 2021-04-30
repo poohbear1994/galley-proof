@@ -2,35 +2,35 @@
 微信原生小程序
 
 ## 项目目录
-｜-- project
-｜      ｜-- component 组件文件夹（11个组件与1个共同行为组成）
-｜      ｜     ｜-- behaviors 组件的共同行为文件夹（非组件）
-｜      ｜     ｜-- book
-｜      ｜     ｜-- classic 3个组件与1个共同行为组成
-｜      ｜           ｜-- essay
-｜      ｜           ｜-- movie
-｜      ｜           ｜-- music
-｜      ｜           ｜-- classic-beh
-｜      ｜     ｜-- episode
-｜      ｜     ｜-- image-button
-｜      ｜     ｜-- like
-｜      ｜     ｜-- loading
-｜      ｜     ｜-- mask
-｜      ｜     ｜-- navi
-｜      ｜     ｜-- preview
-｜      ｜     ｜-- search
-｜      ｜     ｜-- tag
-｜      ｜-- images 静态图片文件夹
-｜      ｜-- models 数据请求文件夹（4种类型接口的数据请求）
-｜      ｜     ｜-- book
-｜      ｜     ｜-- classic
-｜      ｜     ｜-- keyword
-｜      ｜     ｜-- like
-｜      ｜-- pages 页面文件夹（4个页面）
-｜      ｜     ｜-- book
-｜      ｜     ｜-- book-detail
-｜      ｜     ｜-- classic
-｜      ｜     ｜-- my
+* ｜-- project
+* ｜      ｜-- component 组件文件夹（11个组件与1个共同行为组成）
+* ｜      ｜     ｜-- behaviors 组件的共同行为文件夹（非组件）
+* ｜      ｜     ｜-- book
+* ｜      ｜     ｜-- classic 3个组件与1个共同行为组成
+* ｜      ｜           ｜-- essay
+* ｜      ｜           ｜-- movie
+* ｜      ｜           ｜-- music
+* ｜      ｜           ｜-- classic-beh
+* ｜      ｜     ｜-- episode
+* ｜      ｜     ｜-- image-button
+* ｜      ｜     ｜-- like
+* ｜      ｜     ｜-- loading
+* ｜      ｜     ｜-- mask
+* ｜      ｜     ｜-- navi
+* ｜      ｜     ｜-- preview
+* ｜      ｜     ｜-- search
+* ｜      ｜     ｜-- tag
+* ｜      ｜-- images 静态图片文件夹
+* ｜      ｜-- models 数据请求文件夹（4种类型接口的数据请求）
+* ｜      ｜     ｜-- book
+* ｜      ｜     ｜-- classic
+* ｜      ｜     ｜-- keyword
+* ｜      ｜     ｜-- like
+* ｜      ｜-- pages 页面文件夹（4个页面）
+* ｜      ｜     ｜-- book
+* ｜      ｜     ｜-- book-detail
+* ｜      ｜     ｜-- classic
+* ｜      ｜     ｜-- my
 
 
 ## .js格式
